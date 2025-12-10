@@ -1,0 +1,2344 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_d7d53e643c115c73f52c540672ee0e28 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+<div style="position: fixed; 
+            top: 10px; left: 50px; width: 400px; 
+            background-color: white; border:2px solid grey; z-index:9999; 
+            font-size:16px; padding: 10px; border-radius: 5px;">
+    <b>🚛 Turkey Logistics Route Heatmap</b><br>
+    <span style="font-size:12px;">Line color/thickness = Trip Volume</span><br>
+    <span style="font-size:11px; color:#3388ff;">■</span> Low &nbsp;
+    <span style="font-size:11px; color:#88cc00;">■</span> Medium-Low &nbsp;
+    <span style="font-size:11px; color:#ffaa00;">■</span> Medium-High &nbsp;
+    <span style="font-size:11px; color:#ff3333;">■</span> High
+</div>
+    
+            <div class="folium-map" id="map_d7d53e643c115c73f52c540672ee0e28" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_d7d53e643c115c73f52c540672ee0e28 = L.map(
+                "map_d7d53e643c115c73f52c540672ee0e28",
+                {
+                    center: [39.0, 35.0],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_35284292c18e341e8da2e1779bce221e = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_35284292c18e341e8da2e1779bce221e.addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+            var poly_line_05c223b4b3bf619337466f33015d7819 = L.polyline(
+                [[40.8533, 29.8815], [41.0082, 28.9784]],
+                {"bubblingMouseEvents": true, "color": "#ff3333", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#ff3333", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 8}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_36e4a0e2cd88ffcaeb216a3ef2fece9c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_693cb87465127434cb08fc39c20681a4 = $(`<div id="html_693cb87465127434cb08fc39c20681a4" style="width: 100.0%; height: 100.0%;"><b>KOCAELİ ↔ İSTANBUL</b><br>Trips: 5834</div>`)[0];
+                popup_36e4a0e2cd88ffcaeb216a3ef2fece9c.setContent(html_693cb87465127434cb08fc39c20681a4);
+            
+        
+
+        poly_line_05c223b4b3bf619337466f33015d7819.bindPopup(popup_36e4a0e2cd88ffcaeb216a3ef2fece9c)
+        ;
+
+        
+    
+    
+            var poly_line_b2844b14aae44597e5682c5c0885a1f9 = L.polyline(
+                [[40.8533, 29.8815], [40.694, 30.4358]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_d0d7e9d7c23b02b5622301503a5ae2f1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0eb2f26a245112c1312dc599bc0359f1 = $(`<div id="html_0eb2f26a245112c1312dc599bc0359f1" style="width: 100.0%; height: 100.0%;"><b>KOCAELİ ↔ SAKARYA</b><br>Trips: 692</div>`)[0];
+                popup_d0d7e9d7c23b02b5622301503a5ae2f1.setContent(html_0eb2f26a245112c1312dc599bc0359f1);
+            
+        
+
+        poly_line_b2844b14aae44597e5682c5c0885a1f9.bindPopup(popup_d0d7e9d7c23b02b5622301503a5ae2f1)
+        ;
+
+        
+    
+    
+            var poly_line_a893b7ede0f6d1fb0bea1f137c7e38f6 = L.polyline(
+                [[40.1826, 29.0665], [40.8533, 29.8815]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_0d1921ad6886a93aedf34202970fd8f9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7fe9e5ab1990774d25d99479ea63b86d = $(`<div id="html_7fe9e5ab1990774d25d99479ea63b86d" style="width: 100.0%; height: 100.0%;"><b>BURSA ↔ KOCAELİ</b><br>Trips: 631</div>`)[0];
+                popup_0d1921ad6886a93aedf34202970fd8f9.setContent(html_7fe9e5ab1990774d25d99479ea63b86d);
+            
+        
+
+        poly_line_a893b7ede0f6d1fb0bea1f137c7e38f6.bindPopup(popup_0d1921ad6886a93aedf34202970fd8f9)
+        ;
+
+        
+    
+    
+            var poly_line_1d7c997850a0843121628076b6a425a7 = L.polyline(
+                [[40.8533, 29.8815], [38.4192, 27.1287]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_6f0a20d5acf9e3e20dd7dc07d1535cf3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_21dc1ab8174040a5920a89b513a86e2c = $(`<div id="html_21dc1ab8174040a5920a89b513a86e2c" style="width: 100.0%; height: 100.0%;"><b>KOCAELİ ↔ İZMİR</b><br>Trips: 435</div>`)[0];
+                popup_6f0a20d5acf9e3e20dd7dc07d1535cf3.setContent(html_21dc1ab8174040a5920a89b513a86e2c);
+            
+        
+
+        poly_line_1d7c997850a0843121628076b6a425a7.bindPopup(popup_6f0a20d5acf9e3e20dd7dc07d1535cf3)
+        ;
+
+        
+    
+    
+            var poly_line_72b6050830e20aab7143f200710d0471 = L.polyline(
+                [[40.8533, 29.8815], [40.9833, 27.5167]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_129ba8f5e6d10f45373eb390f9f6d0b5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cb098517c41546657bac7b7434ad18bb = $(`<div id="html_cb098517c41546657bac7b7434ad18bb" style="width: 100.0%; height: 100.0%;"><b>KOCAELİ ↔ TEKİRDAĞ</b><br>Trips: 434</div>`)[0];
+                popup_129ba8f5e6d10f45373eb390f9f6d0b5.setContent(html_cb098517c41546657bac7b7434ad18bb);
+            
+        
+
+        poly_line_72b6050830e20aab7143f200710d0471.bindPopup(popup_129ba8f5e6d10f45373eb390f9f6d0b5)
+        ;
+
+        
+    
+    
+            var poly_line_dca0749725f573598bf9fbbc3407a8a5 = L.polyline(
+                [[39.6484, 27.8826], [40.1826, 29.0665]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_97e7ae3c6a87e8ccf9838fa515b78b15 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_56a4e828ae864fd512961b7ae618ca4c = $(`<div id="html_56a4e828ae864fd512961b7ae618ca4c" style="width: 100.0%; height: 100.0%;"><b>BALIKESİR ↔ BURSA</b><br>Trips: 407</div>`)[0];
+                popup_97e7ae3c6a87e8ccf9838fa515b78b15.setContent(html_56a4e828ae864fd512961b7ae618ca4c);
+            
+        
+
+        poly_line_dca0749725f573598bf9fbbc3407a8a5.bindPopup(popup_97e7ae3c6a87e8ccf9838fa515b78b15)
+        ;
+
+        
+    
+    
+            var poly_line_cd35aef9bee58daefc1471ff47c31237 = L.polyline(
+                [[38.7507, 30.5567], [39.7767, 30.5206]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_e0c8f2aed117b8af39342ca597ae6cfc = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6d3774df5ee287d6683ece67f4c96adb = $(`<div id="html_6d3774df5ee287d6683ece67f4c96adb" style="width: 100.0%; height: 100.0%;"><b>AFYON ↔ ESKİŞEHİR</b><br>Trips: 359</div>`)[0];
+                popup_e0c8f2aed117b8af39342ca597ae6cfc.setContent(html_6d3774df5ee287d6683ece67f4c96adb);
+            
+        
+
+        poly_line_cd35aef9bee58daefc1471ff47c31237.bindPopup(popup_e0c8f2aed117b8af39342ca597ae6cfc)
+        ;
+
+        
+    
+    
+            var poly_line_e568950644de85e7dd5bef666ecd11de = L.polyline(
+                [[39.9334, 32.8597], [38.4192, 27.1287]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_8f59977e34714d198b2e9656d412c1eb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_42b47a3b56f73d23f84b22871ea7eaf0 = $(`<div id="html_42b47a3b56f73d23f84b22871ea7eaf0" style="width: 100.0%; height: 100.0%;"><b>ANKARA ↔ İZMİR</b><br>Trips: 359</div>`)[0];
+                popup_8f59977e34714d198b2e9656d412c1eb.setContent(html_42b47a3b56f73d23f84b22871ea7eaf0);
+            
+        
+
+        poly_line_e568950644de85e7dd5bef666ecd11de.bindPopup(popup_8f59977e34714d198b2e9656d412c1eb)
+        ;
+
+        
+    
+    
+            var poly_line_abc22eabeaa33714b58ea7fe4693b8a5 = L.polyline(
+                [[37.7765, 29.0864], [38.4192, 27.1287]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_1e56a518336d633e3d54bbfd9362222b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_30391e42bcb0ddb0e7b3f2c6c6208709 = $(`<div id="html_30391e42bcb0ddb0e7b3f2c6c6208709" style="width: 100.0%; height: 100.0%;"><b>DENİZLİ ↔ İZMİR</b><br>Trips: 337</div>`)[0];
+                popup_1e56a518336d633e3d54bbfd9362222b.setContent(html_30391e42bcb0ddb0e7b3f2c6c6208709);
+            
+        
+
+        poly_line_abc22eabeaa33714b58ea7fe4693b8a5.bindPopup(popup_1e56a518336d633e3d54bbfd9362222b)
+        ;
+
+        
+    
+    
+            var poly_line_0e69d9601155b39592b931f1266c8e8c = L.polyline(
+                [[36.8969, 30.7133], [40.8533, 29.8815]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_738c390f17500a87bbf354e3f14a1038 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0b5ca6106748995eb08a1a5bada755fe = $(`<div id="html_0b5ca6106748995eb08a1a5bada755fe" style="width: 100.0%; height: 100.0%;"><b>ANTALYA ↔ KOCAELİ</b><br>Trips: 295</div>`)[0];
+                popup_738c390f17500a87bbf354e3f14a1038.setContent(html_0b5ca6106748995eb08a1a5bada755fe);
+            
+        
+
+        poly_line_0e69d9601155b39592b931f1266c8e8c.bindPopup(popup_738c390f17500a87bbf354e3f14a1038)
+        ;
+
+        
+    
+    
+            var poly_line_1b83dbeb7e8c8af1a16b1c935d266a5a = L.polyline(
+                [[40.1826, 29.0665], [39.7767, 30.5206]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_aa590574a57a264bea369085f660fb57 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cb17d68aba0b4574bd9d38af1cab3afa = $(`<div id="html_cb17d68aba0b4574bd9d38af1cab3afa" style="width: 100.0%; height: 100.0%;"><b>BURSA ↔ ESKİŞEHİR</b><br>Trips: 246</div>`)[0];
+                popup_aa590574a57a264bea369085f660fb57.setContent(html_cb17d68aba0b4574bd9d38af1cab3afa);
+            
+        
+
+        poly_line_1b83dbeb7e8c8af1a16b1c935d266a5a.bindPopup(popup_aa590574a57a264bea369085f660fb57)
+        ;
+
+        
+    
+    
+            var poly_line_12d40ba4abb85c55064a574fc264f62f = L.polyline(
+                [[40.1826, 29.0665], [40.694, 30.4358]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_271fb971a7f2714183234aa6787988cc = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7fcef638c1aefa23581da7e4fe6ac684 = $(`<div id="html_7fcef638c1aefa23581da7e4fe6ac684" style="width: 100.0%; height: 100.0%;"><b>BURSA ↔ SAKARYA</b><br>Trips: 243</div>`)[0];
+                popup_271fb971a7f2714183234aa6787988cc.setContent(html_7fcef638c1aefa23581da7e4fe6ac684);
+            
+        
+
+        poly_line_12d40ba4abb85c55064a574fc264f62f.bindPopup(popup_271fb971a7f2714183234aa6787988cc)
+        ;
+
+        
+    
+    
+            var poly_line_0794c9e87a76e50dac2069cb4eea0a69 = L.polyline(
+                [[40.694, 30.4358], [38.4192, 27.1287]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_65cf1b9e70f07bca77c6377e6d157780 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a42c0f8c25e7ca0f884d10ea9f191f41 = $(`<div id="html_a42c0f8c25e7ca0f884d10ea9f191f41" style="width: 100.0%; height: 100.0%;"><b>SAKARYA ↔ İZMİR</b><br>Trips: 235</div>`)[0];
+                popup_65cf1b9e70f07bca77c6377e6d157780.setContent(html_a42c0f8c25e7ca0f884d10ea9f191f41);
+            
+        
+
+        poly_line_0794c9e87a76e50dac2069cb4eea0a69.bindPopup(popup_65cf1b9e70f07bca77c6377e6d157780)
+        ;
+
+        
+    
+    
+            var poly_line_6e69aabdecd5948ed877a2db6ceec76c = L.polyline(
+                [[39.9334, 32.8597], [40.694, 30.4358]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_c028d7480702741695f4f3866c118bba = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ad7356216e0e876d195c78bef8177704 = $(`<div id="html_ad7356216e0e876d195c78bef8177704" style="width: 100.0%; height: 100.0%;"><b>ANKARA ↔ SAKARYA</b><br>Trips: 231</div>`)[0];
+                popup_c028d7480702741695f4f3866c118bba.setContent(html_ad7356216e0e876d195c78bef8177704);
+            
+        
+
+        poly_line_6e69aabdecd5948ed877a2db6ceec76c.bindPopup(popup_c028d7480702741695f4f3866c118bba)
+        ;
+
+        
+    
+    
+            var poly_line_bb8e00f795f219b4a389b3063f4c929d = L.polyline(
+                [[39.7767, 30.5206], [41.0082, 28.9784]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_bb9771a33ec17806b3dd62c88c0be217 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_31ae80ceec45566744963288f77702c1 = $(`<div id="html_31ae80ceec45566744963288f77702c1" style="width: 100.0%; height: 100.0%;"><b>ESKİŞEHİR ↔ İSTANBUL</b><br>Trips: 226</div>`)[0];
+                popup_bb9771a33ec17806b3dd62c88c0be217.setContent(html_31ae80ceec45566744963288f77702c1);
+            
+        
+
+        poly_line_bb8e00f795f219b4a389b3063f4c929d.bindPopup(popup_bb9771a33ec17806b3dd62c88c0be217)
+        ;
+
+        
+    
+    
+            var poly_line_bb3a7e4984dc3fc2ebd99422de046d08 = L.polyline(
+                [[37.2153, 28.3636], [38.4192, 27.1287]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_01a5dcf4c82a2638fba6f22f912015c7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f0f9d9b25e4334fb4512107bba83b7b4 = $(`<div id="html_f0f9d9b25e4334fb4512107bba83b7b4" style="width: 100.0%; height: 100.0%;"><b>MUĞLA ↔ İZMİR</b><br>Trips: 224</div>`)[0];
+                popup_01a5dcf4c82a2638fba6f22f912015c7.setContent(html_f0f9d9b25e4334fb4512107bba83b7b4);
+            
+        
+
+        poly_line_bb3a7e4984dc3fc2ebd99422de046d08.bindPopup(popup_01a5dcf4c82a2638fba6f22f912015c7)
+        ;
+
+        
+    
+    
+            var poly_line_78bc8e655e70b9470180c1ff0bc36e25 = L.polyline(
+                [[40.9833, 27.5167], [38.4192, 27.1287]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_a04d7b3cc53efccf6fd0e7e0342d50d5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2e201ee13c1fe320c8dc9dd936ba17b4 = $(`<div id="html_2e201ee13c1fe320c8dc9dd936ba17b4" style="width: 100.0%; height: 100.0%;"><b>TEKİRDAĞ ↔ İZMİR</b><br>Trips: 224</div>`)[0];
+                popup_a04d7b3cc53efccf6fd0e7e0342d50d5.setContent(html_2e201ee13c1fe320c8dc9dd936ba17b4);
+            
+        
+
+        poly_line_78bc8e655e70b9470180c1ff0bc36e25.bindPopup(popup_a04d7b3cc53efccf6fd0e7e0342d50d5)
+        ;
+
+        
+    
+    
+            var poly_line_e15c60c401b7535b58266added7384ce = L.polyline(
+                [[40.9833, 27.5167], [41.0082, 28.9784]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_ce13b1ae7cbc5b56f42d661c062b74d7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9aa18472afe5c7c7849fbe6086085a8e = $(`<div id="html_9aa18472afe5c7c7849fbe6086085a8e" style="width: 100.0%; height: 100.0%;"><b>TEKİRDAĞ ↔ İSTANBUL</b><br>Trips: 223</div>`)[0];
+                popup_ce13b1ae7cbc5b56f42d661c062b74d7.setContent(html_9aa18472afe5c7c7849fbe6086085a8e);
+            
+        
+
+        poly_line_e15c60c401b7535b58266added7384ce.bindPopup(popup_ce13b1ae7cbc5b56f42d661c062b74d7)
+        ;
+
+        
+    
+    
+            var poly_line_dd918147f32a516e6584ab198ca3d383 = L.polyline(
+                [[37.0, 35.3213], [40.8533, 29.8815]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_101e791f158b45b7145316de1da6f8c7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a106d0de2d808e2d301a56cfddfd9c54 = $(`<div id="html_a106d0de2d808e2d301a56cfddfd9c54" style="width: 100.0%; height: 100.0%;"><b>ADANA ↔ KOCAELİ</b><br>Trips: 209</div>`)[0];
+                popup_101e791f158b45b7145316de1da6f8c7.setContent(html_a106d0de2d808e2d301a56cfddfd9c54);
+            
+        
+
+        poly_line_dd918147f32a516e6584ab198ca3d383.bindPopup(popup_101e791f158b45b7145316de1da6f8c7)
+        ;
+
+        
+    
+    
+            var poly_line_f824c89a42e02078275ef0b5d244c9af = L.polyline(
+                [[39.9334, 32.8597], [39.7477, 37.0179]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_b5f250b88e7b2b7c03a06660479086d2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_24ef8d335a51c83e7099d71b72ca9d69 = $(`<div id="html_24ef8d335a51c83e7099d71b72ca9d69" style="width: 100.0%; height: 100.0%;"><b>ANKARA ↔ SİVAS</b><br>Trips: 208</div>`)[0];
+                popup_b5f250b88e7b2b7c03a06660479086d2.setContent(html_24ef8d335a51c83e7099d71b72ca9d69);
+            
+        
+
+        poly_line_f824c89a42e02078275ef0b5d244c9af.bindPopup(popup_b5f250b88e7b2b7c03a06660479086d2)
+        ;
+
+        
+    
+    
+            var poly_line_6dcd0af8d97066567f8fd0fc521ded64 = L.polyline(
+                [[40.0567, 30.0665], [39.7767, 30.5206]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_5970bbc02bfe3cebe44393fbcffa406a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a61440d3e78cf14a67ee1379f9d69775 = $(`<div id="html_a61440d3e78cf14a67ee1379f9d69775" style="width: 100.0%; height: 100.0%;"><b>BİLECİK ↔ ESKİŞEHİR</b><br>Trips: 207</div>`)[0];
+                popup_5970bbc02bfe3cebe44393fbcffa406a.setContent(html_a61440d3e78cf14a67ee1379f9d69775);
+            
+        
+
+        poly_line_6dcd0af8d97066567f8fd0fc521ded64.bindPopup(popup_5970bbc02bfe3cebe44393fbcffa406a)
+        ;
+
+        
+    
+    
+            var poly_line_9ffbb6452a81e465d256857162217acf = L.polyline(
+                [[38.6191, 27.4289], [41.0082, 28.9784]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_1711f1e1d8f56b8822c3641944bbed9a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_79d27f0cda82d1619686312dbb88f656 = $(`<div id="html_79d27f0cda82d1619686312dbb88f656" style="width: 100.0%; height: 100.0%;"><b>MANİSA ↔ İSTANBUL</b><br>Trips: 207</div>`)[0];
+                popup_1711f1e1d8f56b8822c3641944bbed9a.setContent(html_79d27f0cda82d1619686312dbb88f656);
+            
+        
+
+        poly_line_9ffbb6452a81e465d256857162217acf.bindPopup(popup_1711f1e1d8f56b8822c3641944bbed9a)
+        ;
+
+        
+    
+    
+            var poly_line_4015c6e7f7f6ecfee2bab5fd21636814 = L.polyline(
+                [[39.9334, 32.8597], [38.7312, 35.4787]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_b6c1017ce5cc1e522a87443518cf0a57 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d7dc91c6a1048e64ab51db181adb9623 = $(`<div id="html_d7dc91c6a1048e64ab51db181adb9623" style="width: 100.0%; height: 100.0%;"><b>ANKARA ↔ KAYSERİ</b><br>Trips: 195</div>`)[0];
+                popup_b6c1017ce5cc1e522a87443518cf0a57.setContent(html_d7dc91c6a1048e64ab51db181adb9623);
+            
+        
+
+        poly_line_4015c6e7f7f6ecfee2bab5fd21636814.bindPopup(popup_b6c1017ce5cc1e522a87443518cf0a57)
+        ;
+
+        
+    
+    
+            var poly_line_7d31a59a9a3cdb2938e41bf7b2553088 = L.polyline(
+                [[41.0082, 28.9784], [38.4192, 27.1287]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_8dde9bd8a836275abf39618553ebe302 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9350e6368c3ddee3a70d2a929f2cd56d = $(`<div id="html_9350e6368c3ddee3a70d2a929f2cd56d" style="width: 100.0%; height: 100.0%;"><b>İSTANBUL ↔ İZMİR</b><br>Trips: 193</div>`)[0];
+                popup_8dde9bd8a836275abf39618553ebe302.setContent(html_9350e6368c3ddee3a70d2a929f2cd56d);
+            
+        
+
+        poly_line_7d31a59a9a3cdb2938e41bf7b2553088.bindPopup(popup_8dde9bd8a836275abf39618553ebe302)
+        ;
+
+        
+    
+    
+            var poly_line_c56d2dc03fe16688f7b25dee1aee465d = L.polyline(
+                [[39.9334, 32.8597], [41.0082, 28.9784]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_782ee11c17bc6818c0279590fc793723 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cb7f0f87957d70629cb6e3a5f103cb40 = $(`<div id="html_cb7f0f87957d70629cb6e3a5f103cb40" style="width: 100.0%; height: 100.0%;"><b>ANKARA ↔ İSTANBUL</b><br>Trips: 179</div>`)[0];
+                popup_782ee11c17bc6818c0279590fc793723.setContent(html_cb7f0f87957d70629cb6e3a5f103cb40);
+            
+        
+
+        poly_line_c56d2dc03fe16688f7b25dee1aee465d.bindPopup(popup_782ee11c17bc6818c0279590fc793723)
+        ;
+
+        
+    
+    
+            var poly_line_f3b6d4fcfda8c77d0759351fd63e94c6 = L.polyline(
+                [[39.9334, 32.8597], [41.2867, 36.33]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_7f5de336d24d88ecdce763f8fd446d9b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_717740ee135719bce88ac89bb9525812 = $(`<div id="html_717740ee135719bce88ac89bb9525812" style="width: 100.0%; height: 100.0%;"><b>ANKARA ↔ SAMSUN</b><br>Trips: 178</div>`)[0];
+                popup_7f5de336d24d88ecdce763f8fd446d9b.setContent(html_717740ee135719bce88ac89bb9525812);
+            
+        
+
+        poly_line_f3b6d4fcfda8c77d0759351fd63e94c6.bindPopup(popup_7f5de336d24d88ecdce763f8fd446d9b)
+        ;
+
+        
+    
+    
+            var poly_line_395ea969a56eb6b5576e6437a2db1cda = L.polyline(
+                [[39.7767, 30.5206], [40.8533, 29.8815]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_10ce69c9eecfa80662c4bc9fef8631ed = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d447ce8f7e351264a90b75a8f60d8367 = $(`<div id="html_d447ce8f7e351264a90b75a8f60d8367" style="width: 100.0%; height: 100.0%;"><b>ESKİŞEHİR ↔ KOCAELİ</b><br>Trips: 174</div>`)[0];
+                popup_10ce69c9eecfa80662c4bc9fef8631ed.setContent(html_d447ce8f7e351264a90b75a8f60d8367);
+            
+        
+
+        poly_line_395ea969a56eb6b5576e6437a2db1cda.bindPopup(popup_10ce69c9eecfa80662c4bc9fef8631ed)
+        ;
+
+        
+    
+    
+            var poly_line_6eb64cef323507253270ceb0c0f7541a = L.polyline(
+                [[37.7765, 29.0864], [38.6191, 27.4289]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_315c981fda3f41cf5b6057a1983d9520 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9316218029fdef07bb10b22a0fd4f622 = $(`<div id="html_9316218029fdef07bb10b22a0fd4f622" style="width: 100.0%; height: 100.0%;"><b>DENİZLİ ↔ MANİSA</b><br>Trips: 173</div>`)[0];
+                popup_315c981fda3f41cf5b6057a1983d9520.setContent(html_9316218029fdef07bb10b22a0fd4f622);
+            
+        
+
+        poly_line_6eb64cef323507253270ceb0c0f7541a.bindPopup(popup_315c981fda3f41cf5b6057a1983d9520)
+        ;
+
+        
+    
+    
+            var poly_line_105f8025f6fbca6ba18abe1f403bf9fc = L.polyline(
+                [[40.1826, 29.0665], [38.4192, 27.1287]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_bd2cd5735729ac79d328f4d58bf33982 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5e301049b80400919169e53408f2c562 = $(`<div id="html_5e301049b80400919169e53408f2c562" style="width: 100.0%; height: 100.0%;"><b>BURSA ↔ İZMİR</b><br>Trips: 171</div>`)[0];
+                popup_bd2cd5735729ac79d328f4d58bf33982.setContent(html_5e301049b80400919169e53408f2c562);
+            
+        
+
+        poly_line_105f8025f6fbca6ba18abe1f403bf9fc.bindPopup(popup_bd2cd5735729ac79d328f4d58bf33982)
+        ;
+
+        
+    
+    
+            var poly_line_c179a339f7f9824d4411dc2ba05bc964 = L.polyline(
+                [[41.2867, 36.33], [41.0082, 28.9784]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_23ad31a98ae12c204e55a2b4943b7288 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_da283a8942f2b220a3561ffe5dfe8a28 = $(`<div id="html_da283a8942f2b220a3561ffe5dfe8a28" style="width: 100.0%; height: 100.0%;"><b>SAMSUN ↔ İSTANBUL</b><br>Trips: 169</div>`)[0];
+                popup_23ad31a98ae12c204e55a2b4943b7288.setContent(html_da283a8942f2b220a3561ffe5dfe8a28);
+            
+        
+
+        poly_line_c179a339f7f9824d4411dc2ba05bc964.bindPopup(popup_23ad31a98ae12c204e55a2b4943b7288)
+        ;
+
+        
+    
+    
+            var poly_line_4cf9c5d4b78194fbc1edc85309933aac = L.polyline(
+                [[37.0, 35.3213], [37.0662, 37.3833]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_f10f166cbce44ad6154b20510093d77d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6e55594edd56a5e5c8f920abec1b0e4c = $(`<div id="html_6e55594edd56a5e5c8f920abec1b0e4c" style="width: 100.0%; height: 100.0%;"><b>ADANA ↔ GAZİANTEP</b><br>Trips: 165</div>`)[0];
+                popup_f10f166cbce44ad6154b20510093d77d.setContent(html_6e55594edd56a5e5c8f920abec1b0e4c);
+            
+        
+
+        poly_line_4cf9c5d4b78194fbc1edc85309933aac.bindPopup(popup_f10f166cbce44ad6154b20510093d77d)
+        ;
+
+        
+    
+    
+            var poly_line_4690b81de9064ec82ee2e1c818dbe442 = L.polyline(
+                [[41.7333, 27.2167], [40.9833, 27.5167]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_273c985bf2c4344ea7fe624e5b37769e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c63d8a9bd8a3b9bac28a5457be1c2c80 = $(`<div id="html_c63d8a9bd8a3b9bac28a5457be1c2c80" style="width: 100.0%; height: 100.0%;"><b>KIRKLARELİ ↔ TEKİRDAĞ</b><br>Trips: 159</div>`)[0];
+                popup_273c985bf2c4344ea7fe624e5b37769e.setContent(html_c63d8a9bd8a3b9bac28a5457be1c2c80);
+            
+        
+
+        poly_line_4690b81de9064ec82ee2e1c818dbe442.bindPopup(popup_273c985bf2c4344ea7fe624e5b37769e)
+        ;
+
+        
+    
+    
+            var poly_line_2f171dba32f9738a96d4bd1d4074f365 = L.polyline(
+                [[39.9334, 32.8597], [40.9833, 27.5167]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_5b5f9df73039c934b9dd59420f644c51 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2e3d7c11a24b92f05aa22a2723abc84d = $(`<div id="html_2e3d7c11a24b92f05aa22a2723abc84d" style="width: 100.0%; height: 100.0%;"><b>ANKARA ↔ TEKİRDAĞ</b><br>Trips: 156</div>`)[0];
+                popup_5b5f9df73039c934b9dd59420f644c51.setContent(html_2e3d7c11a24b92f05aa22a2723abc84d);
+            
+        
+
+        poly_line_2f171dba32f9738a96d4bd1d4074f365.bindPopup(popup_5b5f9df73039c934b9dd59420f644c51)
+        ;
+
+        
+    
+    
+            var poly_line_63fc45052cfb9bc0db702a639fa82c1b = L.polyline(
+                [[36.8969, 30.7133], [37.7765, 29.0864]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_7f6c25ce24cbfc44a96abdad1a92ca56 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5266b9402598c41e91399c4b9f1c73ba = $(`<div id="html_5266b9402598c41e91399c4b9f1c73ba" style="width: 100.0%; height: 100.0%;"><b>ANTALYA ↔ DENİZLİ</b><br>Trips: 146</div>`)[0];
+                popup_7f6c25ce24cbfc44a96abdad1a92ca56.setContent(html_5266b9402598c41e91399c4b9f1c73ba);
+            
+        
+
+        poly_line_63fc45052cfb9bc0db702a639fa82c1b.bindPopup(popup_7f6c25ce24cbfc44a96abdad1a92ca56)
+        ;
+
+        
+    
+    
+            var poly_line_27146e1f5297e30f7730bf63ecfe1f46 = L.polyline(
+                [[39.9334, 32.8597], [37.8667, 32.4833]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_8408377bd49b09134a577cfe9e22930c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8c9b4210605a14e819134c6feaf04cf3 = $(`<div id="html_8c9b4210605a14e819134c6feaf04cf3" style="width: 100.0%; height: 100.0%;"><b>ANKARA ↔ KONYA</b><br>Trips: 145</div>`)[0];
+                popup_8408377bd49b09134a577cfe9e22930c.setContent(html_8c9b4210605a14e819134c6feaf04cf3);
+            
+        
+
+        poly_line_27146e1f5297e30f7730bf63ecfe1f46.bindPopup(popup_8408377bd49b09134a577cfe9e22930c)
+        ;
+
+        
+    
+    
+            var poly_line_d6033954a7beeba193e4abacdb37ece1 = L.polyline(
+                [[38.6191, 27.4289], [38.4192, 27.1287]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_cf2c805609475df236eee0085d46c0dc = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4f7c6ecdefb5075979ed9094a8e7ee76 = $(`<div id="html_4f7c6ecdefb5075979ed9094a8e7ee76" style="width: 100.0%; height: 100.0%;"><b>MANİSA ↔ İZMİR</b><br>Trips: 145</div>`)[0];
+                popup_cf2c805609475df236eee0085d46c0dc.setContent(html_4f7c6ecdefb5075979ed9094a8e7ee76);
+            
+        
+
+        poly_line_d6033954a7beeba193e4abacdb37ece1.bindPopup(popup_cf2c805609475df236eee0085d46c0dc)
+        ;
+
+        
+    
+    
+            var poly_line_92390b859c761b43d87fc24c0cc21a61 = L.polyline(
+                [[39.9334, 32.8597], [38.6191, 27.4289]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_7df5bbd5d9a7ed20a3079e2f3bcc14d9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_67375a5c2c09ad80a37d8c65c5f69acf = $(`<div id="html_67375a5c2c09ad80a37d8c65c5f69acf" style="width: 100.0%; height: 100.0%;"><b>ANKARA ↔ MANİSA</b><br>Trips: 145</div>`)[0];
+                popup_7df5bbd5d9a7ed20a3079e2f3bcc14d9.setContent(html_67375a5c2c09ad80a37d8c65c5f69acf);
+            
+        
+
+        poly_line_92390b859c761b43d87fc24c0cc21a61.bindPopup(popup_7df5bbd5d9a7ed20a3079e2f3bcc14d9)
+        ;
+
+        
+    
+    
+            var poly_line_b0dbd5e6b0b153514188c691288715d2 = L.polyline(
+                [[40.0567, 30.0665], [41.0082, 28.9784]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_9cb913da749f503d98207c76397527cd = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_751548fd28f3ba17f3a382e5ac7fdbdf = $(`<div id="html_751548fd28f3ba17f3a382e5ac7fdbdf" style="width: 100.0%; height: 100.0%;"><b>BİLECİK ↔ İSTANBUL</b><br>Trips: 145</div>`)[0];
+                popup_9cb913da749f503d98207c76397527cd.setContent(html_751548fd28f3ba17f3a382e5ac7fdbdf);
+            
+        
+
+        poly_line_b0dbd5e6b0b153514188c691288715d2.bindPopup(popup_9cb913da749f503d98207c76397527cd)
+        ;
+
+        
+    
+    
+            var poly_line_2b8eeacddaed14793aa0423b8275686a = L.polyline(
+                [[37.7765, 29.0864], [38.6823, 29.4082]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_444be2e4221940e4b7017685eb2b7222 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_997ebca9a3e06d34fcf642e13964aa16 = $(`<div id="html_997ebca9a3e06d34fcf642e13964aa16" style="width: 100.0%; height: 100.0%;"><b>DENİZLİ ↔ UŞAK</b><br>Trips: 140</div>`)[0];
+                popup_444be2e4221940e4b7017685eb2b7222.setContent(html_997ebca9a3e06d34fcf642e13964aa16);
+            
+        
+
+        poly_line_2b8eeacddaed14793aa0423b8275686a.bindPopup(popup_444be2e4221940e4b7017685eb2b7222)
+        ;
+
+        
+    
+    
+            var poly_line_958cca7caf750a78a844359b538af36b = L.polyline(
+                [[39.6484, 27.8826], [38.6191, 27.4289]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_899aefdbaaed18f5a1217945718926c2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_213500975cc7948a965b038d16bb9c41 = $(`<div id="html_213500975cc7948a965b038d16bb9c41" style="width: 100.0%; height: 100.0%;"><b>BALIKESİR ↔ MANİSA</b><br>Trips: 138</div>`)[0];
+                popup_899aefdbaaed18f5a1217945718926c2.setContent(html_213500975cc7948a965b038d16bb9c41);
+            
+        
+
+        poly_line_958cca7caf750a78a844359b538af36b.bindPopup(popup_899aefdbaaed18f5a1217945718926c2)
+        ;
+
+        
+    
+    
+            var poly_line_dd0048e2f0c93082e33f26f64994843e = L.polyline(
+                [[40.8438, 31.1565], [40.8533, 29.8815]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_740a167048f07383f6d59bbe7f8211e4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_de2674d7614f9ac4bd471ad638f378e1 = $(`<div id="html_de2674d7614f9ac4bd471ad638f378e1" style="width: 100.0%; height: 100.0%;"><b>DÜZCE ↔ KOCAELİ</b><br>Trips: 133</div>`)[0];
+                popup_740a167048f07383f6d59bbe7f8211e4.setContent(html_de2674d7614f9ac4bd471ad638f378e1);
+            
+        
+
+        poly_line_dd0048e2f0c93082e33f26f64994843e.bindPopup(popup_740a167048f07383f6d59bbe7f8211e4)
+        ;
+
+        
+    
+    
+            var poly_line_e14a6c26eb7fc49acd8f88ad355c11e8 = L.polyline(
+                [[36.8969, 30.7133], [41.0082, 28.9784]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_3fb3f244b206d0d4e5c0b2478be3ed6b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0a5e212df393de19c44576ca8ac7e53d = $(`<div id="html_0a5e212df393de19c44576ca8ac7e53d" style="width: 100.0%; height: 100.0%;"><b>ANTALYA ↔ İSTANBUL</b><br>Trips: 121</div>`)[0];
+                popup_3fb3f244b206d0d4e5c0b2478be3ed6b.setContent(html_0a5e212df393de19c44576ca8ac7e53d);
+            
+        
+
+        poly_line_e14a6c26eb7fc49acd8f88ad355c11e8.bindPopup(popup_3fb3f244b206d0d4e5c0b2478be3ed6b)
+        ;
+
+        
+    
+    
+            var poly_line_1d282051c29505e9e07dfb6cfcdc3c1c = L.polyline(
+                [[39.9334, 32.8597], [40.8533, 29.8815]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_129317ac43f753fc8f8db064e5022eca = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_be64d54dd1eae4da81a10d190dfe1e9a = $(`<div id="html_be64d54dd1eae4da81a10d190dfe1e9a" style="width: 100.0%; height: 100.0%;"><b>ANKARA ↔ KOCAELİ</b><br>Trips: 120</div>`)[0];
+                popup_129317ac43f753fc8f8db064e5022eca.setContent(html_be64d54dd1eae4da81a10d190dfe1e9a);
+            
+        
+
+        poly_line_1d282051c29505e9e07dfb6cfcdc3c1c.bindPopup(popup_129317ac43f753fc8f8db064e5022eca)
+        ;
+
+        
+    
+    
+            var poly_line_7e09c9bc737a03e37895adf410247056 = L.polyline(
+                [[39.75, 39.5], [39.7767, 30.5206]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_9bfc87ed666ef35e46ecd3494bb7d8aa = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cb60afeb7fac60376529e5f4f266b41b = $(`<div id="html_cb60afeb7fac60376529e5f4f266b41b" style="width: 100.0%; height: 100.0%;"><b>ERZİNCAN ↔ ESKİŞEHİR</b><br>Trips: 112</div>`)[0];
+                popup_9bfc87ed666ef35e46ecd3494bb7d8aa.setContent(html_cb60afeb7fac60376529e5f4f266b41b);
+            
+        
+
+        poly_line_7e09c9bc737a03e37895adf410247056.bindPopup(popup_9bfc87ed666ef35e46ecd3494bb7d8aa)
+        ;
+
+        
+    
+    
+            var poly_line_266ed4299380b8f0e69b12ce1708c4e4 = L.polyline(
+                [[38.7507, 30.5567], [40.0567, 30.0665]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_75ed0f3662b719d034370fde8d2658d3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2bc71f1b2f9ec8f47a24fab305178531 = $(`<div id="html_2bc71f1b2f9ec8f47a24fab305178531" style="width: 100.0%; height: 100.0%;"><b>AFYON ↔ BİLECİK</b><br>Trips: 109</div>`)[0];
+                popup_75ed0f3662b719d034370fde8d2658d3.setContent(html_2bc71f1b2f9ec8f47a24fab305178531);
+            
+        
+
+        poly_line_266ed4299380b8f0e69b12ce1708c4e4.bindPopup(popup_75ed0f3662b719d034370fde8d2658d3)
+        ;
+
+        
+    
+    
+            var poly_line_8d53c002991aafcdca031d7b94d81851 = L.polyline(
+                [[38.7507, 30.5567], [37.7765, 29.0864]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_2cea741a151939fb2c4c6e240d844b1a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_88f6c0bc3243d06f4a9dee611ea36150 = $(`<div id="html_88f6c0bc3243d06f4a9dee611ea36150" style="width: 100.0%; height: 100.0%;"><b>AFYON ↔ DENİZLİ</b><br>Trips: 109</div>`)[0];
+                popup_2cea741a151939fb2c4c6e240d844b1a.setContent(html_88f6c0bc3243d06f4a9dee611ea36150);
+            
+        
+
+        poly_line_8d53c002991aafcdca031d7b94d81851.bindPopup(popup_2cea741a151939fb2c4c6e240d844b1a)
+        ;
+
+        
+    
+    
+            var poly_line_a95a2df870567097fd9166c82ce978ae = L.polyline(
+                [[41.7333, 27.2167], [40.8533, 29.8815]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_adea5277ce506c154964d4fff48a17e6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_37c598580ba8f1f9828c1dde652e56c2 = $(`<div id="html_37c598580ba8f1f9828c1dde652e56c2" style="width: 100.0%; height: 100.0%;"><b>KIRKLARELİ ↔ KOCAELİ</b><br>Trips: 106</div>`)[0];
+                popup_adea5277ce506c154964d4fff48a17e6.setContent(html_37c598580ba8f1f9828c1dde652e56c2);
+            
+        
+
+        poly_line_a95a2df870567097fd9166c82ce978ae.bindPopup(popup_adea5277ce506c154964d4fff48a17e6)
+        ;
+
+        
+    
+    
+            var poly_line_7b150ef6e9fdfb3e15fdc496cad626b3 = L.polyline(
+                [[37.0, 35.3213], [41.0082, 28.9784]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_a5bd55af4d7a824a13cd76af8b126d89 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cf67cbf30e1e77cdfedb361dcab50c24 = $(`<div id="html_cf67cbf30e1e77cdfedb361dcab50c24" style="width: 100.0%; height: 100.0%;"><b>ADANA ↔ İSTANBUL</b><br>Trips: 102</div>`)[0];
+                popup_a5bd55af4d7a824a13cd76af8b126d89.setContent(html_cf67cbf30e1e77cdfedb361dcab50c24);
+            
+        
+
+        poly_line_7b150ef6e9fdfb3e15fdc496cad626b3.bindPopup(popup_a5bd55af4d7a824a13cd76af8b126d89)
+        ;
+
+        
+    
+    
+            var poly_line_2d26cf254d5e5e90461e7cb3422c46ac = L.polyline(
+                [[36.8969, 30.7133], [38.4192, 27.1287]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_a45eca211237bf89c4f548ba79e76573 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_56418e359a67853b10b5a946f5cf8a32 = $(`<div id="html_56418e359a67853b10b5a946f5cf8a32" style="width: 100.0%; height: 100.0%;"><b>ANTALYA ↔ İZMİR</b><br>Trips: 101</div>`)[0];
+                popup_a45eca211237bf89c4f548ba79e76573.setContent(html_56418e359a67853b10b5a946f5cf8a32);
+            
+        
+
+        poly_line_2d26cf254d5e5e90461e7cb3422c46ac.bindPopup(popup_a45eca211237bf89c4f548ba79e76573)
+        ;
+
+        
+    
+    
+            var poly_line_c77864f45519726d7cd6d5450063d90f = L.polyline(
+                [[39.6484, 27.8826], [40.8533, 29.8815]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_dca93031ecd46930fcc5d34c60e77a1a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3510ad951eb2adc6fbc4a9b86cc4e757 = $(`<div id="html_3510ad951eb2adc6fbc4a9b86cc4e757" style="width: 100.0%; height: 100.0%;"><b>BALIKESİR ↔ KOCAELİ</b><br>Trips: 101</div>`)[0];
+                popup_dca93031ecd46930fcc5d34c60e77a1a.setContent(html_3510ad951eb2adc6fbc4a9b86cc4e757);
+            
+        
+
+        poly_line_c77864f45519726d7cd6d5450063d90f.bindPopup(popup_dca93031ecd46930fcc5d34c60e77a1a)
+        ;
+
+        
+    
+    
+            var poly_line_e176ba5bc88cac0af0d308623e065239 = L.polyline(
+                [[37.1759, 33.2287], [40.694, 30.4358]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_5d8647fca27ee77bcdf2b3e7cf8beb9f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1046ef9adb6d327907bc974b33b88d75 = $(`<div id="html_1046ef9adb6d327907bc974b33b88d75" style="width: 100.0%; height: 100.0%;"><b>KARAMAN ↔ SAKARYA</b><br>Trips: 101</div>`)[0];
+                popup_5d8647fca27ee77bcdf2b3e7cf8beb9f.setContent(html_1046ef9adb6d327907bc974b33b88d75);
+            
+        
+
+        poly_line_e176ba5bc88cac0af0d308623e065239.bindPopup(popup_5d8647fca27ee77bcdf2b3e7cf8beb9f)
+        ;
+
+        
+    
+    
+            var poly_line_ed8f385a0f7d0061a918822ce5bdd186 = L.polyline(
+                [[36.8969, 30.7133], [40.694, 30.4358]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_80a51036a5c60b6e4aaeb8a5b03db371 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_24298ba03c795446bb492cede44c1c25 = $(`<div id="html_24298ba03c795446bb492cede44c1c25" style="width: 100.0%; height: 100.0%;"><b>ANTALYA ↔ SAKARYA</b><br>Trips: 99</div>`)[0];
+                popup_80a51036a5c60b6e4aaeb8a5b03db371.setContent(html_24298ba03c795446bb492cede44c1c25);
+            
+        
+
+        poly_line_ed8f385a0f7d0061a918822ce5bdd186.bindPopup(popup_80a51036a5c60b6e4aaeb8a5b03db371)
+        ;
+
+        
+    
+    
+            var poly_line_157c5b06151047fb4543efaa7c86ba80 = L.polyline(
+                [[40.1826, 29.0665], [40.9833, 27.5167]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_081503a5a72f9c8ba88eae5eb3dce65e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5f051d5390e7eeea405ef680503c5f7e = $(`<div id="html_5f051d5390e7eeea405ef680503c5f7e" style="width: 100.0%; height: 100.0%;"><b>BURSA ↔ TEKİRDAĞ</b><br>Trips: 98</div>`)[0];
+                popup_081503a5a72f9c8ba88eae5eb3dce65e.setContent(html_5f051d5390e7eeea405ef680503c5f7e);
+            
+        
+
+        poly_line_157c5b06151047fb4543efaa7c86ba80.bindPopup(popup_081503a5a72f9c8ba88eae5eb3dce65e)
+        ;
+
+        
+    
+    
+            var poly_line_157360a9268d2a6c8baed50773241789 = L.polyline(
+                [[37.0, 35.3213], [36.4018, 36.3498]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_4ec011b4ad532d603afc21cc1ffcc449 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_59a2244309ebd680d326c7782f204125 = $(`<div id="html_59a2244309ebd680d326c7782f204125" style="width: 100.0%; height: 100.0%;"><b>ADANA ↔ HATAY</b><br>Trips: 98</div>`)[0];
+                popup_4ec011b4ad532d603afc21cc1ffcc449.setContent(html_59a2244309ebd680d326c7782f204125);
+            
+        
+
+        poly_line_157360a9268d2a6c8baed50773241789.bindPopup(popup_4ec011b4ad532d603afc21cc1ffcc449)
+        ;
+
+        
+    
+    
+            var poly_line_b2056c3c0f23dbea2c2ecccd7d6947a4 = L.polyline(
+                [[41.2867, 36.33], [38.4192, 27.1287]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_01cd45e9b41a75bd3ff11d954b761dd3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2dace67f56d8b4e17681cdc5ac1fef0c = $(`<div id="html_2dace67f56d8b4e17681cdc5ac1fef0c" style="width: 100.0%; height: 100.0%;"><b>SAMSUN ↔ İZMİR</b><br>Trips: 98</div>`)[0];
+                popup_01cd45e9b41a75bd3ff11d954b761dd3.setContent(html_2dace67f56d8b4e17681cdc5ac1fef0c);
+            
+        
+
+        poly_line_b2056c3c0f23dbea2c2ecccd7d6947a4.bindPopup(popup_01cd45e9b41a75bd3ff11d954b761dd3)
+        ;
+
+        
+    
+    
+            var poly_line_fbedbe04b7b7e47b0571291c677abb80 = L.polyline(
+                [[38.7312, 35.4787], [38.4192, 27.1287]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_a18de55d080f1e81950d4f9e080bdf58 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_aad3fe6e45adc1f56f0db053bde2f3ea = $(`<div id="html_aad3fe6e45adc1f56f0db053bde2f3ea" style="width: 100.0%; height: 100.0%;"><b>KAYSERİ ↔ İZMİR</b><br>Trips: 98</div>`)[0];
+                popup_a18de55d080f1e81950d4f9e080bdf58.setContent(html_aad3fe6e45adc1f56f0db053bde2f3ea);
+            
+        
+
+        poly_line_fbedbe04b7b7e47b0571291c677abb80.bindPopup(popup_a18de55d080f1e81950d4f9e080bdf58)
+        ;
+
+        
+    
+    
+            var poly_line_697cf4c27877bc78981b26aa485dd748 = L.polyline(
+                [[37.0, 35.3213], [39.7767, 30.5206]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_c041cdec138fd8a7f57a990b01dca2df = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1724c02b4274023480eaa6704f6fb84c = $(`<div id="html_1724c02b4274023480eaa6704f6fb84c" style="width: 100.0%; height: 100.0%;"><b>ADANA ↔ ESKİŞEHİR</b><br>Trips: 96</div>`)[0];
+                popup_c041cdec138fd8a7f57a990b01dca2df.setContent(html_1724c02b4274023480eaa6704f6fb84c);
+            
+        
+
+        poly_line_697cf4c27877bc78981b26aa485dd748.bindPopup(popup_c041cdec138fd8a7f57a990b01dca2df)
+        ;
+
+        
+    
+    
+            var poly_line_70b14998cd439bd505f9271bc96d7a12 = L.polyline(
+                [[40.8533, 29.8815], [41.2867, 36.33]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_7dc9eac3f569358a8bcaefe7405e9b94 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_94d0db9268067cffbfca0405861857aa = $(`<div id="html_94d0db9268067cffbfca0405861857aa" style="width: 100.0%; height: 100.0%;"><b>KOCAELİ ↔ SAMSUN</b><br>Trips: 96</div>`)[0];
+                popup_7dc9eac3f569358a8bcaefe7405e9b94.setContent(html_94d0db9268067cffbfca0405861857aa);
+            
+        
+
+        poly_line_70b14998cd439bd505f9271bc96d7a12.bindPopup(popup_7dc9eac3f569358a8bcaefe7405e9b94)
+        ;
+
+        
+    
+    
+            var poly_line_5477d2378605d73bbad375dcf7aff144 = L.polyline(
+                [[38.7312, 35.4787], [41.0082, 28.9784]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_a4e9812b9ba8995103c17c42f5a616e8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_df0ea9f1f2e02b14ddf1a730628cd795 = $(`<div id="html_df0ea9f1f2e02b14ddf1a730628cd795" style="width: 100.0%; height: 100.0%;"><b>KAYSERİ ↔ İSTANBUL</b><br>Trips: 95</div>`)[0];
+                popup_a4e9812b9ba8995103c17c42f5a616e8.setContent(html_df0ea9f1f2e02b14ddf1a730628cd795);
+            
+        
+
+        poly_line_5477d2378605d73bbad375dcf7aff144.bindPopup(popup_a4e9812b9ba8995103c17c42f5a616e8)
+        ;
+
+        
+    
+    
+            var poly_line_a30e93301973fac4fbdd3808e4678205 = L.polyline(
+                [[39.7767, 30.5206], [39.4167, 29.9833]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_ccb74e359e8fa21c19a5ffd27c66fa9d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_653b4b880d036af5871defc8e6394ae3 = $(`<div id="html_653b4b880d036af5871defc8e6394ae3" style="width: 100.0%; height: 100.0%;"><b>ESKİŞEHİR ↔ KÜTAHYA</b><br>Trips: 94</div>`)[0];
+                popup_ccb74e359e8fa21c19a5ffd27c66fa9d.setContent(html_653b4b880d036af5871defc8e6394ae3);
+            
+        
+
+        poly_line_a30e93301973fac4fbdd3808e4678205.bindPopup(popup_ccb74e359e8fa21c19a5ffd27c66fa9d)
+        ;
+
+        
+    
+    
+            var poly_line_70b7ca87bec651af9443554e459e6365 = L.polyline(
+                [[39.9334, 32.8597], [40.1826, 29.0665]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_dd5a5b2575c1275127a81fd3506d0486 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f24deff5c7a4caea536046400aa6e3dc = $(`<div id="html_f24deff5c7a4caea536046400aa6e3dc" style="width: 100.0%; height: 100.0%;"><b>ANKARA ↔ BURSA</b><br>Trips: 92</div>`)[0];
+                popup_dd5a5b2575c1275127a81fd3506d0486.setContent(html_f24deff5c7a4caea536046400aa6e3dc);
+            
+        
+
+        poly_line_70b7ca87bec651af9443554e459e6365.bindPopup(popup_dd5a5b2575c1275127a81fd3506d0486)
+        ;
+
+        
+    
+    
+            var poly_line_d206c23c4a0b5801d7ada217bbabcc47 = L.polyline(
+                [[37.0, 35.3213], [37.8667, 32.4833]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_f1c5d81937313dceb217985a32e339ba = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a92de6b1f95d04657c4dea4dab631867 = $(`<div id="html_a92de6b1f95d04657c4dea4dab631867" style="width: 100.0%; height: 100.0%;"><b>ADANA ↔ KONYA</b><br>Trips: 91</div>`)[0];
+                popup_f1c5d81937313dceb217985a32e339ba.setContent(html_a92de6b1f95d04657c4dea4dab631867);
+            
+        
+
+        poly_line_d206c23c4a0b5801d7ada217bbabcc47.bindPopup(popup_f1c5d81937313dceb217985a32e339ba)
+        ;
+
+        
+    
+    
+            var poly_line_f16d832bd9f44f65ae50760a75a9d539 = L.polyline(
+                [[39.9334, 32.8597], [36.8969, 30.7133]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_9d46f1f28a8b3c8a81019dc32a12a933 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7327090f98d6c0c93a9b10c25de055c2 = $(`<div id="html_7327090f98d6c0c93a9b10c25de055c2" style="width: 100.0%; height: 100.0%;"><b>ANKARA ↔ ANTALYA</b><br>Trips: 90</div>`)[0];
+                popup_9d46f1f28a8b3c8a81019dc32a12a933.setContent(html_7327090f98d6c0c93a9b10c25de055c2);
+            
+        
+
+        poly_line_f16d832bd9f44f65ae50760a75a9d539.bindPopup(popup_9d46f1f28a8b3c8a81019dc32a12a933)
+        ;
+
+        
+    
+    
+            var poly_line_f51b70ca9d70f3fe394da8e826dffa50 = L.polyline(
+                [[41.6818, 26.5623], [38.4192, 27.1287]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_6de18ba58b246fdf7f4c695cc4eb4e50 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7982a22e701eb40f3d10240e183f2a90 = $(`<div id="html_7982a22e701eb40f3d10240e183f2a90" style="width: 100.0%; height: 100.0%;"><b>EDİRNE ↔ İZMİR</b><br>Trips: 89</div>`)[0];
+                popup_6de18ba58b246fdf7f4c695cc4eb4e50.setContent(html_7982a22e701eb40f3d10240e183f2a90);
+            
+        
+
+        poly_line_f51b70ca9d70f3fe394da8e826dffa50.bindPopup(popup_6de18ba58b246fdf7f4c695cc4eb4e50)
+        ;
+
+        
+    
+    
+            var poly_line_f9959c9a46d8ffcf11a5764d7d7e7e66 = L.polyline(
+                [[39.9334, 32.8597], [37.1759, 33.2287]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_4eede78c4c62f8e33612e85f2831ce1d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7b6510f5df9b26d9d57dd62dfa74f45d = $(`<div id="html_7b6510f5df9b26d9d57dd62dfa74f45d" style="width: 100.0%; height: 100.0%;"><b>ANKARA ↔ KARAMAN</b><br>Trips: 87</div>`)[0];
+                popup_4eede78c4c62f8e33612e85f2831ce1d.setContent(html_7b6510f5df9b26d9d57dd62dfa74f45d);
+            
+        
+
+        poly_line_f9959c9a46d8ffcf11a5764d7d7e7e66.bindPopup(popup_4eede78c4c62f8e33612e85f2831ce1d)
+        ;
+
+        
+    
+    
+            var poly_line_285c32fafece69745aceb1d607d1a2bc = L.polyline(
+                [[36.4018, 36.3498], [38.7312, 35.4787]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_447881f7b5e201eb8ddc8b46d218675a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_269107d99494fd7ec8a6312e1c6182ef = $(`<div id="html_269107d99494fd7ec8a6312e1c6182ef" style="width: 100.0%; height: 100.0%;"><b>HATAY ↔ KAYSERİ</b><br>Trips: 87</div>`)[0];
+                popup_447881f7b5e201eb8ddc8b46d218675a.setContent(html_269107d99494fd7ec8a6312e1c6182ef);
+            
+        
+
+        poly_line_285c32fafece69745aceb1d607d1a2bc.bindPopup(popup_447881f7b5e201eb8ddc8b46d218675a)
+        ;
+
+        
+    
+    
+            var poly_line_e6e1699847b6ecc9b9d14e8755a397fb = L.polyline(
+                [[40.1826, 29.0665], [41.0082, 28.9784]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_d0366bfa4bf94784f1dfa1643268eee0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3eeca08ed0f3779ac24ec7e6801abf13 = $(`<div id="html_3eeca08ed0f3779ac24ec7e6801abf13" style="width: 100.0%; height: 100.0%;"><b>BURSA ↔ İSTANBUL</b><br>Trips: 85</div>`)[0];
+                popup_d0366bfa4bf94784f1dfa1643268eee0.setContent(html_3eeca08ed0f3779ac24ec7e6801abf13);
+            
+        
+
+        poly_line_e6e1699847b6ecc9b9d14e8755a397fb.bindPopup(popup_d0366bfa4bf94784f1dfa1643268eee0)
+        ;
+
+        
+    
+    
+            var poly_line_b441b935a74a617fc1045812bc3def6a = L.polyline(
+                [[39.7767, 30.5206], [40.694, 30.4358]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_daa0cb5bef0b0702c0a09687fc6b30d8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_13b17612a143f7653e577efd27174cb5 = $(`<div id="html_13b17612a143f7653e577efd27174cb5" style="width: 100.0%; height: 100.0%;"><b>ESKİŞEHİR ↔ SAKARYA</b><br>Trips: 82</div>`)[0];
+                popup_daa0cb5bef0b0702c0a09687fc6b30d8.setContent(html_13b17612a143f7653e577efd27174cb5);
+            
+        
+
+        poly_line_b441b935a74a617fc1045812bc3def6a.bindPopup(popup_daa0cb5bef0b0702c0a09687fc6b30d8)
+        ;
+
+        
+    
+    
+            var circle_marker_88c966133413eb4e03448dbae3413e00 = L.circleMarker(
+                [40.8533, 29.8815],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_36552cabda5f748b87c91801f594cec5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f335e3a6bc37ab3deb79df51cf98c921 = $(`<div id="html_f335e3a6bc37ab3deb79df51cf98c921" style="width: 100.0%; height: 100.0%;"><b>KOCAELİ</b><br>Total trips: 9260</div>`)[0];
+                popup_36552cabda5f748b87c91801f594cec5.setContent(html_f335e3a6bc37ab3deb79df51cf98c921);
+            
+        
+
+        circle_marker_88c966133413eb4e03448dbae3413e00.bindPopup(popup_36552cabda5f748b87c91801f594cec5)
+        ;
+
+        
+    
+    
+            var circle_marker_959dfbba56e96f6bda633d74831b5c91 = L.circleMarker(
+                [41.0082, 28.9784],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_3fae754c9b690f742b709266751b3004 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9c88ad208a3513554a3bee3b45adfd7c = $(`<div id="html_9c88ad208a3513554a3bee3b45adfd7c" style="width: 100.0%; height: 100.0%;"><b>İSTANBUL</b><br>Total trips: 7579</div>`)[0];
+                popup_3fae754c9b690f742b709266751b3004.setContent(html_9c88ad208a3513554a3bee3b45adfd7c);
+            
+        
+
+        circle_marker_959dfbba56e96f6bda633d74831b5c91.bindPopup(popup_3fae754c9b690f742b709266751b3004)
+        ;
+
+        
+    
+    
+            var circle_marker_d2a48c8bafbf946537086b3e7b775ae6 = L.circleMarker(
+                [40.694, 30.4358],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_22099e8e9000110d92f3817dfb9eefad = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6d84d36b112004ae7c1595dfd0d397cf = $(`<div id="html_6d84d36b112004ae7c1595dfd0d397cf" style="width: 100.0%; height: 100.0%;"><b>SAKARYA</b><br>Total trips: 1683</div>`)[0];
+                popup_22099e8e9000110d92f3817dfb9eefad.setContent(html_6d84d36b112004ae7c1595dfd0d397cf);
+            
+        
+
+        circle_marker_d2a48c8bafbf946537086b3e7b775ae6.bindPopup(popup_22099e8e9000110d92f3817dfb9eefad)
+        ;
+
+        
+    
+    
+            var circle_marker_0e628cee86a0db70dfa0d0ecf04e23e7 = L.circleMarker(
+                [40.1826, 29.0665],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_06221033d737f992ae43a04eb7283cd1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e0fd4abf6df7066b5f5e77d97dc82f67 = $(`<div id="html_e0fd4abf6df7066b5f5e77d97dc82f67" style="width: 100.0%; height: 100.0%;"><b>BURSA</b><br>Total trips: 1973</div>`)[0];
+                popup_06221033d737f992ae43a04eb7283cd1.setContent(html_e0fd4abf6df7066b5f5e77d97dc82f67);
+            
+        
+
+        circle_marker_0e628cee86a0db70dfa0d0ecf04e23e7.bindPopup(popup_06221033d737f992ae43a04eb7283cd1)
+        ;
+
+        
+    
+    
+            var circle_marker_2d16951be9d6075b251da95700d5b185 = L.circleMarker(
+                [38.4192, 27.1287],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_79c7e3f7dc02ce71f8cb395f95c40f5d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_530335eda6375a8c34ccdfe952665ebd = $(`<div id="html_530335eda6375a8c34ccdfe952665ebd" style="width: 100.0%; height: 100.0%;"><b>İZMİR</b><br>Total trips: 2709</div>`)[0];
+                popup_79c7e3f7dc02ce71f8cb395f95c40f5d.setContent(html_530335eda6375a8c34ccdfe952665ebd);
+            
+        
+
+        circle_marker_2d16951be9d6075b251da95700d5b185.bindPopup(popup_79c7e3f7dc02ce71f8cb395f95c40f5d)
+        ;
+
+        
+    
+    
+            var circle_marker_9e43b3b1c02044c52e4bb8c33dee3c55 = L.circleMarker(
+                [40.9833, 27.5167],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_30b4f0cdb7a0ad0935a28284911b79c8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cc5c8a0c44a4163b61dc2a6334c42397 = $(`<div id="html_cc5c8a0c44a4163b61dc2a6334c42397" style="width: 100.0%; height: 100.0%;"><b>TEKİRDAĞ</b><br>Total trips: 1294</div>`)[0];
+                popup_30b4f0cdb7a0ad0935a28284911b79c8.setContent(html_cc5c8a0c44a4163b61dc2a6334c42397);
+            
+        
+
+        circle_marker_9e43b3b1c02044c52e4bb8c33dee3c55.bindPopup(popup_30b4f0cdb7a0ad0935a28284911b79c8)
+        ;
+
+        
+    
+    
+            var circle_marker_164a76aef974e789ac6be1122d2c6081 = L.circleMarker(
+                [39.6484, 27.8826],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_bb41de7789528ef139fc380de1467a56 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dde98b27903b0c2a3d04c4d20463edd3 = $(`<div id="html_dde98b27903b0c2a3d04c4d20463edd3" style="width: 100.0%; height: 100.0%;"><b>BALIKESİR</b><br>Total trips: 646</div>`)[0];
+                popup_bb41de7789528ef139fc380de1467a56.setContent(html_dde98b27903b0c2a3d04c4d20463edd3);
+            
+        
+
+        circle_marker_164a76aef974e789ac6be1122d2c6081.bindPopup(popup_bb41de7789528ef139fc380de1467a56)
+        ;
+
+        
+    
+    
+            var circle_marker_491288d15e344a7321ae69f88de502ee = L.circleMarker(
+                [38.7507, 30.5567],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_c870a30bf62d2713f51089deb4a5f1b9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f2ad6e9319239cd73eef4a054fb95517 = $(`<div id="html_f2ad6e9319239cd73eef4a054fb95517" style="width: 100.0%; height: 100.0%;"><b>AFYON</b><br>Total trips: 577</div>`)[0];
+                popup_c870a30bf62d2713f51089deb4a5f1b9.setContent(html_f2ad6e9319239cd73eef4a054fb95517);
+            
+        
+
+        circle_marker_491288d15e344a7321ae69f88de502ee.bindPopup(popup_c870a30bf62d2713f51089deb4a5f1b9)
+        ;
+
+        
+    
+    
+            var circle_marker_f7fe3fc29a1041af1a4862f25cab26f8 = L.circleMarker(
+                [39.7767, 30.5206],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_18eb9a894e7077526882b5c54b4b102c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_720178e9d75275b40b5646544a3fa3a4 = $(`<div id="html_720178e9d75275b40b5646544a3fa3a4" style="width: 100.0%; height: 100.0%;"><b>ESKİŞEHİR</b><br>Total trips: 1596</div>`)[0];
+                popup_18eb9a894e7077526882b5c54b4b102c.setContent(html_720178e9d75275b40b5646544a3fa3a4);
+            
+        
+
+        circle_marker_f7fe3fc29a1041af1a4862f25cab26f8.bindPopup(popup_18eb9a894e7077526882b5c54b4b102c)
+        ;
+
+        
+    
+    
+            var circle_marker_c89b914fa9567f54090505b6d54ee201 = L.circleMarker(
+                [39.9334, 32.8597],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_ed280b9e7d86f3142c4b4f30d8bd8b36 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f2c80495b7e5de82b28054f0c68ae191 = $(`<div id="html_f2c80495b7e5de82b28054f0c68ae191" style="width: 100.0%; height: 100.0%;"><b>ANKARA</b><br>Total trips: 2185</div>`)[0];
+                popup_ed280b9e7d86f3142c4b4f30d8bd8b36.setContent(html_f2c80495b7e5de82b28054f0c68ae191);
+            
+        
+
+        circle_marker_c89b914fa9567f54090505b6d54ee201.bindPopup(popup_ed280b9e7d86f3142c4b4f30d8bd8b36)
+        ;
+
+        
+    
+    
+            var circle_marker_3d7dbb9553ddab987271bd57d83da2ac = L.circleMarker(
+                [37.7765, 29.0864],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_ea290204620a5bf2280edcf8a504bae4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_51e1b81351b44c6b7e003e562473f573 = $(`<div id="html_51e1b81351b44c6b7e003e562473f573" style="width: 100.0%; height: 100.0%;"><b>DENİZLİ</b><br>Total trips: 905</div>`)[0];
+                popup_ea290204620a5bf2280edcf8a504bae4.setContent(html_51e1b81351b44c6b7e003e562473f573);
+            
+        
+
+        circle_marker_3d7dbb9553ddab987271bd57d83da2ac.bindPopup(popup_ea290204620a5bf2280edcf8a504bae4)
+        ;
+
+        
+    
+    
+            var circle_marker_90722552dd62f44982b2a6e44d8b81ad = L.circleMarker(
+                [36.8969, 30.7133],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_cf561adf9fbdaabb7ff61e1723047469 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c0a4cd5186077db1caac6277cd345264 = $(`<div id="html_c0a4cd5186077db1caac6277cd345264" style="width: 100.0%; height: 100.0%;"><b>ANTALYA</b><br>Total trips: 852</div>`)[0];
+                popup_cf561adf9fbdaabb7ff61e1723047469.setContent(html_c0a4cd5186077db1caac6277cd345264);
+            
+        
+
+        circle_marker_90722552dd62f44982b2a6e44d8b81ad.bindPopup(popup_cf561adf9fbdaabb7ff61e1723047469)
+        ;
+
+        
+    
+    
+            var circle_marker_bd4b4e3404c526342e77f7d26e7a3154 = L.circleMarker(
+                [37.2153, 28.3636],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_675370b079a8585e356502f8526edce0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_993e66d6b56d971bbbf35271e85c70ce = $(`<div id="html_993e66d6b56d971bbbf35271e85c70ce" style="width: 100.0%; height: 100.0%;"><b>MUĞLA</b><br>Total trips: 224</div>`)[0];
+                popup_675370b079a8585e356502f8526edce0.setContent(html_993e66d6b56d971bbbf35271e85c70ce);
+            
+        
+
+        circle_marker_bd4b4e3404c526342e77f7d26e7a3154.bindPopup(popup_675370b079a8585e356502f8526edce0)
+        ;
+
+        
+    
+    
+            var circle_marker_c2fc180d8b180f62e9788744594cf834 = L.circleMarker(
+                [37.0, 35.3213],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_a7655ba7256fb84919f9e84935bd3458 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1408d777f82f6cf742b6bdb7f9dcb791 = $(`<div id="html_1408d777f82f6cf742b6bdb7f9dcb791" style="width: 100.0%; height: 100.0%;"><b>ADANA</b><br>Total trips: 761</div>`)[0];
+                popup_a7655ba7256fb84919f9e84935bd3458.setContent(html_1408d777f82f6cf742b6bdb7f9dcb791);
+            
+        
+
+        circle_marker_c2fc180d8b180f62e9788744594cf834.bindPopup(popup_a7655ba7256fb84919f9e84935bd3458)
+        ;
+
+        
+    
+    
+            var circle_marker_fe58af2fc8bfcc6c8ee88d527f6f549e = L.circleMarker(
+                [39.7477, 37.0179],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_c8cb7df32434bd06511def2ffb158365 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_84bf8f223ca2dd07439a5c58870bf1f7 = $(`<div id="html_84bf8f223ca2dd07439a5c58870bf1f7" style="width: 100.0%; height: 100.0%;"><b>SİVAS</b><br>Total trips: 208</div>`)[0];
+                popup_c8cb7df32434bd06511def2ffb158365.setContent(html_84bf8f223ca2dd07439a5c58870bf1f7);
+            
+        
+
+        circle_marker_fe58af2fc8bfcc6c8ee88d527f6f549e.bindPopup(popup_c8cb7df32434bd06511def2ffb158365)
+        ;
+
+        
+    
+    
+            var circle_marker_f5b4b65b27bed340fb6c141bc0936b58 = L.circleMarker(
+                [40.0567, 30.0665],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_1fff8d6feb9649a8db90d45abdf4bd4f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e5cd2f8dbef222b55a87ae0e200fd464 = $(`<div id="html_e5cd2f8dbef222b55a87ae0e200fd464" style="width: 100.0%; height: 100.0%;"><b>BİLECİK</b><br>Total trips: 461</div>`)[0];
+                popup_1fff8d6feb9649a8db90d45abdf4bd4f.setContent(html_e5cd2f8dbef222b55a87ae0e200fd464);
+            
+        
+
+        circle_marker_f5b4b65b27bed340fb6c141bc0936b58.bindPopup(popup_1fff8d6feb9649a8db90d45abdf4bd4f)
+        ;
+
+        
+    
+    
+            var circle_marker_6ff41e9640b7c7db33210ac35cd25f1a = L.circleMarker(
+                [38.6191, 27.4289],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_7a350a9c562b6c08fe41c9af6a994c94 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f6553667fca35ec1dffb12eb53f17bde = $(`<div id="html_f6553667fca35ec1dffb12eb53f17bde" style="width: 100.0%; height: 100.0%;"><b>MANİSA</b><br>Total trips: 808</div>`)[0];
+                popup_7a350a9c562b6c08fe41c9af6a994c94.setContent(html_f6553667fca35ec1dffb12eb53f17bde);
+            
+        
+
+        circle_marker_6ff41e9640b7c7db33210ac35cd25f1a.bindPopup(popup_7a350a9c562b6c08fe41c9af6a994c94)
+        ;
+
+        
+    
+    
+            var circle_marker_3169ab16c10a8d0ffbeb03ef2b8ce3c9 = L.circleMarker(
+                [38.7312, 35.4787],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_3001e630dac5a8b44590ef8d5227d5d6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1197a5146484fa451bdcc941d1e40918 = $(`<div id="html_1197a5146484fa451bdcc941d1e40918" style="width: 100.0%; height: 100.0%;"><b>KAYSERİ</b><br>Total trips: 475</div>`)[0];
+                popup_3001e630dac5a8b44590ef8d5227d5d6.setContent(html_1197a5146484fa451bdcc941d1e40918);
+            
+        
+
+        circle_marker_3169ab16c10a8d0ffbeb03ef2b8ce3c9.bindPopup(popup_3001e630dac5a8b44590ef8d5227d5d6)
+        ;
+
+        
+    
+    
+            var circle_marker_0b0de5ada8f982557c2a57aa98f50ff2 = L.circleMarker(
+                [41.2867, 36.33],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_b257c2aa873aa2262dd7f21a99d652f5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b90b7e306f75fb8f34de1509e512a25b = $(`<div id="html_b90b7e306f75fb8f34de1509e512a25b" style="width: 100.0%; height: 100.0%;"><b>SAMSUN</b><br>Total trips: 541</div>`)[0];
+                popup_b257c2aa873aa2262dd7f21a99d652f5.setContent(html_b90b7e306f75fb8f34de1509e512a25b);
+            
+        
+
+        circle_marker_0b0de5ada8f982557c2a57aa98f50ff2.bindPopup(popup_b257c2aa873aa2262dd7f21a99d652f5)
+        ;
+
+        
+    
+    
+            var circle_marker_407cd54682fb182224792a7845a89785 = L.circleMarker(
+                [37.0662, 37.3833],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_f6115683e06ef431203becd5235a0c89 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_43f0493186b0855f3b5913e04d0b3e43 = $(`<div id="html_43f0493186b0855f3b5913e04d0b3e43" style="width: 100.0%; height: 100.0%;"><b>GAZİANTEP</b><br>Total trips: 165</div>`)[0];
+                popup_f6115683e06ef431203becd5235a0c89.setContent(html_43f0493186b0855f3b5913e04d0b3e43);
+            
+        
+
+        circle_marker_407cd54682fb182224792a7845a89785.bindPopup(popup_f6115683e06ef431203becd5235a0c89)
+        ;
+
+        
+    
+    
+            var circle_marker_22f7ee2362b42a0738e89381f564f1ed = L.circleMarker(
+                [41.7333, 27.2167],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_a5a32b91a8b2b236220877a811a3b267 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e91cf911ff037f0b6b156a89d4ff1375 = $(`<div id="html_e91cf911ff037f0b6b156a89d4ff1375" style="width: 100.0%; height: 100.0%;"><b>KIRKLARELİ</b><br>Total trips: 265</div>`)[0];
+                popup_a5a32b91a8b2b236220877a811a3b267.setContent(html_e91cf911ff037f0b6b156a89d4ff1375);
+            
+        
+
+        circle_marker_22f7ee2362b42a0738e89381f564f1ed.bindPopup(popup_a5a32b91a8b2b236220877a811a3b267)
+        ;
+
+        
+    
+    
+            var circle_marker_a5990256c60c3629cab8c160ef44b304 = L.circleMarker(
+                [37.8667, 32.4833],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_f63e06493765fab2ad725d017f22d2a4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_62197ba886629ddcfc70be3252325b9a = $(`<div id="html_62197ba886629ddcfc70be3252325b9a" style="width: 100.0%; height: 100.0%;"><b>KONYA</b><br>Total trips: 236</div>`)[0];
+                popup_f63e06493765fab2ad725d017f22d2a4.setContent(html_62197ba886629ddcfc70be3252325b9a);
+            
+        
+
+        circle_marker_a5990256c60c3629cab8c160ef44b304.bindPopup(popup_f63e06493765fab2ad725d017f22d2a4)
+        ;
+
+        
+    
+    
+            var circle_marker_39bbd952fa3d8254c192d8f43da93a4f = L.circleMarker(
+                [38.6823, 29.4082],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_2fdea98c7a44c1c283b3723d40c39707 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c8bb13661ff51edb78735169e1355ba1 = $(`<div id="html_c8bb13661ff51edb78735169e1355ba1" style="width: 100.0%; height: 100.0%;"><b>UŞAK</b><br>Total trips: 140</div>`)[0];
+                popup_2fdea98c7a44c1c283b3723d40c39707.setContent(html_c8bb13661ff51edb78735169e1355ba1);
+            
+        
+
+        circle_marker_39bbd952fa3d8254c192d8f43da93a4f.bindPopup(popup_2fdea98c7a44c1c283b3723d40c39707)
+        ;
+
+        
+    
+    
+            var circle_marker_849d67a07133145db6f2b3e9014ff786 = L.circleMarker(
+                [40.8438, 31.1565],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_04293bea0d0761dae9c476b2397e6c2f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e03a0d202191e497d95b6b97a8cf0045 = $(`<div id="html_e03a0d202191e497d95b6b97a8cf0045" style="width: 100.0%; height: 100.0%;"><b>DÜZCE</b><br>Total trips: 133</div>`)[0];
+                popup_04293bea0d0761dae9c476b2397e6c2f.setContent(html_e03a0d202191e497d95b6b97a8cf0045);
+            
+        
+
+        circle_marker_849d67a07133145db6f2b3e9014ff786.bindPopup(popup_04293bea0d0761dae9c476b2397e6c2f)
+        ;
+
+        
+    
+    
+            var circle_marker_315430552c78761cdc945491cdb6bda5 = L.circleMarker(
+                [39.75, 39.5],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_558b0a8f22cf855b060ceec2f481aac1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_68da7a921df51905d65166d9df656d2d = $(`<div id="html_68da7a921df51905d65166d9df656d2d" style="width: 100.0%; height: 100.0%;"><b>ERZİNCAN</b><br>Total trips: 112</div>`)[0];
+                popup_558b0a8f22cf855b060ceec2f481aac1.setContent(html_68da7a921df51905d65166d9df656d2d);
+            
+        
+
+        circle_marker_315430552c78761cdc945491cdb6bda5.bindPopup(popup_558b0a8f22cf855b060ceec2f481aac1)
+        ;
+
+        
+    
+    
+            var circle_marker_c0d01cdb8d2feeb5432ae607cbac410a = L.circleMarker(
+                [37.1759, 33.2287],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_0d1655c683b7084395042f4f220c6760 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d79f65e70590136ccfdfcbd6067c6eb8 = $(`<div id="html_d79f65e70590136ccfdfcbd6067c6eb8" style="width: 100.0%; height: 100.0%;"><b>KARAMAN</b><br>Total trips: 188</div>`)[0];
+                popup_0d1655c683b7084395042f4f220c6760.setContent(html_d79f65e70590136ccfdfcbd6067c6eb8);
+            
+        
+
+        circle_marker_c0d01cdb8d2feeb5432ae607cbac410a.bindPopup(popup_0d1655c683b7084395042f4f220c6760)
+        ;
+
+        
+    
+    
+            var circle_marker_cac89bf4f86448ac928864ab24c80710 = L.circleMarker(
+                [36.4018, 36.3498],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_e1bcb39f7273378859df48c9685be28f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_97568dab53bbcdbd75eab9a6453cfe73 = $(`<div id="html_97568dab53bbcdbd75eab9a6453cfe73" style="width: 100.0%; height: 100.0%;"><b>HATAY</b><br>Total trips: 185</div>`)[0];
+                popup_e1bcb39f7273378859df48c9685be28f.setContent(html_97568dab53bbcdbd75eab9a6453cfe73);
+            
+        
+
+        circle_marker_cac89bf4f86448ac928864ab24c80710.bindPopup(popup_e1bcb39f7273378859df48c9685be28f)
+        ;
+
+        
+    
+    
+            var circle_marker_b0b1182e1b3610b431ec2afb5b473799 = L.circleMarker(
+                [39.4167, 29.9833],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_0093334c86b949c6228a8370ecda2cea = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d8e1b07280392f2d257e6614b108458d = $(`<div id="html_d8e1b07280392f2d257e6614b108458d" style="width: 100.0%; height: 100.0%;"><b>KÜTAHYA</b><br>Total trips: 94</div>`)[0];
+                popup_0093334c86b949c6228a8370ecda2cea.setContent(html_d8e1b07280392f2d257e6614b108458d);
+            
+        
+
+        circle_marker_b0b1182e1b3610b431ec2afb5b473799.bindPopup(popup_0093334c86b949c6228a8370ecda2cea)
+        ;
+
+        
+    
+    
+            var circle_marker_5068c40b75006ed47beb688b815a2bca = L.circleMarker(
+                [41.6818, 26.5623],
+                {"bubblingMouseEvents": true, "color": "#333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#666", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_d7d53e643c115c73f52c540672ee0e28);
+        
+    
+        var popup_2f554cb711127090c7809f51cca47675 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_50d5344fadf901712e1e7a372cce572c = $(`<div id="html_50d5344fadf901712e1e7a372cce572c" style="width: 100.0%; height: 100.0%;"><b>EDİRNE</b><br>Total trips: 89</div>`)[0];
+                popup_2f554cb711127090c7809f51cca47675.setContent(html_50d5344fadf901712e1e7a372cce572c);
+            
+        
+
+        circle_marker_5068c40b75006ed47beb688b815a2bca.bindPopup(popup_2f554cb711127090c7809f51cca47675)
+        ;
+
+        
+    
+</script>
+</html>
