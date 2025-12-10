@@ -2335,8 +2335,13 @@
             
         
 
-        circle_marker_5068c40b75006ed47beb688b815a2bca.bindPopup(popup_2f554cb711127090c7809f51cca47675)
-        ;
+        circle_marker_5068c40b75006ed47beb688b815a2bca.bindPopup(popup_2f554cb711127090c7809f51cca47675);
+        // ... other markers ...
+        
+    // Fix for embedding in Power BI / hidden containers
+    setTimeout(function () {
+        map_d7d53e643c115c73f52c540672ee0e28.invalidateSize();
+    }, 500);
 
         
     
